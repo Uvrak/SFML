@@ -4,14 +4,20 @@
 #include "GraphicSettings.h"
 #include "Tile.h"
 #include "Button.h"
+#include "MainMenuState.h"
 
 class Application
 {
 private:
 	GraphicSettings graphicSettings;
+	StateData statedata;
 	sf::RenderWindow* pWindow;
+	
 	sf::Clock dtClock;
 	float dt;
+
+	std::stack<State*> states;
+	std::map<std::string, int> supportedKeys;
 
 	sf::Texture texture;
 	Tile *tile;
@@ -34,6 +40,8 @@ private:
 	void initStateData();
 	void initFont();
 	void initWindow();
+	void initKeys();
+	void initStates();
 
 public:
 	//Constructors /Destructors

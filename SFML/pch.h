@@ -9,6 +9,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <stack>
 
 #include <iostream>
 #include <conio.h>

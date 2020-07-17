@@ -19,6 +19,9 @@
     <Filter Include="Tile">
       <UniqueIdentifier>{d8911376-d822-4f0d-8314-891d0a1b33b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{6ee2a2d0-7014-4936-b111-e593d5d6850d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,12 @@
     <ClCompile Include="Button.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -61,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

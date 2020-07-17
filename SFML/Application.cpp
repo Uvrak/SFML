@@ -19,6 +19,7 @@ void Application::initVariables()
 	buttons["UP"] = new gui::Button(100.f, 100.f, 250.f, 50.f, &font, "vergrößern");
 	buttons["DOWN"] = new gui::Button(100.f, 200.f, 250.f, 50.f, &font, "verkeinern");
 	gridSize = 8;
+	
 }
 
 void Application::initGraphicsSettings()
@@ -28,6 +29,11 @@ void Application::initGraphicsSettings()
 
 void Application::initStateData()
 {
+	this->statedata.window = this->pWindow;
+	this->statedata.gfxSettings = &this->graphicSettings;
+	this->statedata.supportedKeys = &this->supportedKeys;
+	this->statedata.states = &this->states;
+	this->statedata.gridSize = this->gridSize;
 }
 
 void Application::initFont()
@@ -58,6 +64,32 @@ void Application::initWindow()
 	}
 	pWindow->setFramerateLimit(120);
 
+
+}
+
+void Application::initKeys()
+{
+	std::ifstream ifs("Config/supported_keys.ini");
+	if (ifs.is_open()) {
+		std::string key = "";
+		int key_value = 0;
+
+		while (ifs >> key >> key_value)
+		{
+			this->supportedKeys[key] = key_value;
+		}
+	}
+
+	ifs.close();
+
+	for (auto i : this->supportedKeys)
+	{
+		std::cout << i.first << " " << i.second << "\n";
+	}
+}
+void Application::initStates()
+{
+	this->states.push(new MainMenuState(&this->statedata));
 }
 
 // Consturctors / Destructors
@@ -66,8 +98,10 @@ Application::Application()
 	
 	this->initGraphicsSettings();
 	this->initWindow();
-
 	this->initVariables();
+	this->initKeys();
+	this->initStateData();
+	this->initStates();
 	
 }
 
@@ -123,7 +157,7 @@ void Application::update()
 	
 	for (auto i = this->buttons.begin(); i != this->buttons.end(); i++)
 	{
-		i->second->update(mousePosView);	
+		/*i->second->update(mousePosView);	
 		if (i->second->isPressed())
 		{
 			if (i->first._Equal("UP"))
@@ -137,6 +171,18 @@ void Application::update()
 			std::cout << i->first;
 			std::this_thread::sleep_for(std::chrono::microseconds(300000));
 
+		}*/
+		this->updateSFMLEvents();
+
+		if (!this->states.empty())
+		{
+			this->states.top()->update(dt);
+			if (this->states.top()->getQuit())
+			{
+				this->states.top()->endState();
+				delete this->states.top();
+				this->states.pop();
+			}
 		}
 		
 	}
@@ -146,8 +192,11 @@ void Application::update()
 void Application::render()
 {
 	this->pWindow->clear();
-	;
-	pWindow->draw(shape);
+	
+	if (!this->states.empty()) {
+		this->states.top()->render();
+	}
+	/*pWindow->draw(shape);
 	//this->tile->render(*this->pWindow);
 	for (auto i = this->buttons.begin(); i != this->buttons.end(); i++)
 		i->second->render(*pWindow);
@@ -162,7 +211,7 @@ void Application::render()
 	mouseText.setString(ss.str());
 
 	this->pWindow->draw(mouseText);
-
+	*/
 
 	this->pWindow->display();
 

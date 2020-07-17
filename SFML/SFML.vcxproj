@@ -152,11 +152,13 @@
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="GraphicSettings.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,7 +166,9 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="GraphicSettings.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
