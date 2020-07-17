@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{691389aa-d294-4420-8059-975833928fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tile">
+      <UniqueIdentifier>{d8911376-d822-4f0d-8314-891d0a1b33b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,14 +27,20 @@
     <ClCompile Include="pch.cpp">
       <Filter>Headerdateien</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicSettings.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicSettings.cpp">
+      <Filter>Ressourcendateien</Filter>
+    </ClCompile>
     <ClCompile Include="FileSystem.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Ressourcendateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,13 +48,19 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="GraphicSettings.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Ressourcendateien</Filter>
     </ClInclude>
     <ClInclude Include="FileSystem.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Ressourcendateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
