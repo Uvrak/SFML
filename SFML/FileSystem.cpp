@@ -35,3 +35,22 @@ void FileSystem::TraverseFilesUsingDFS(const std::string& folder_path, std::map<
     //
     _findclose(handle);
 }
+
+std::vector<std::string> FileSystem::split(std::string str, char breakOn)
+{
+    std::string statement = "";
+    std::vector<std::string> sVec;
+   for (int i = 0; i < str.length(); i++)
+   {
+       if (str.at(i) != breakOn) {
+           statement += str.at(i);
+        }
+       else {
+           sVec.push_back(statement);
+           statement = "";
+       
+   }
+   }
+   sVec.push_back(statement);
+   return sVec;
+}

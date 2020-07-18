@@ -63,7 +63,7 @@ void MainMenuState::initButtons()
 		
 	);
 
-	this->buttons["EDITOR_STATE"] = new gui::Button(300.f, 680.f, 250.f, 50.f,
+	this->buttons["ULTIMA7_TILES_STATE"] = new gui::Button(300.f, 680.f, 250.f, 50.f,
 		&this->font, "Editor", 50,
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50)
@@ -125,8 +125,8 @@ void MainMenuState::updateButtons()
 	}
 
 	//Editor
-	if (this->buttons["EDITOR_STATE"]->isPressed()) {
-		//this->states->push(new EditorState(this->stateData));
+	if (this->buttons["ULTIMA7_TILES_STATE"]->isPressed()) {
+		this->states->push(new U7TilesState(this->stateData));
 	}
 
 	//Quit the Game

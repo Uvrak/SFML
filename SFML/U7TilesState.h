@@ -1,35 +1,34 @@
 #pragma once
-//#include "GameState.h"
-//#include "EditorState.h"
-//#include "SettingsState.h"
-//#include "GraphicsSettings.h"
-
 #include "State.h"
-#include "U7TilesState.h"
 
-class MainMenuState :
-	public State
+class U7TilesState :
+    public State
 {
 private:
 	//Variables
+	std::vector<sf::RectangleShape> shape;
 
-	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;
 
 	std::map<std::string, gui::Button*> buttons;
 
+	std::map<std::string, std::vector <std::string>> textures;
+
+	std::vector<sf::Texture> text;
+
 	//Functions
 	void initVariables();
-	void initBackground();
 	void initFonts();
 	void initKeybinds();
+	void initBackground();
+	void initTiles();
+	void updateTiles();
 	void initButtons();
 
 public:
-	MainMenuState(StateData* state_data);
-	virtual ~MainMenuState();
-
+	U7TilesState(StateData* state_data);
+	virtual ~U7TilesState();
 	//Functions
 	void updateInput(const float& dt);
 	void updateButtons();
@@ -38,4 +37,3 @@ public:
 	void render(sf::RenderTarget* target = nullptr);
 
 };
-
