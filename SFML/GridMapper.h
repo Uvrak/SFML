@@ -1,18 +1,25 @@
 #pragma once
-//#include "GameState.h"
-//#include "EditorState.h"
-//#include "SettingsState.h"
-//#include "GraphicsSettings.h"
-
 #include "State.h"
-#include "U7TilesState.h"
-#include "GridMapper.h"
+#include <SFML\Graphics\Rect.hpp>
 
-class MainMenuState :
-	public State
+class GridMapper :
+    public State
 {
 private:
 	//Variables
+	std::vector<std::vector<std::vector<sf::RectangleShape>>> grid;
+	std::vector<std::vector<std::vector<sf::RectangleShape*>>> horizontalLines;
+
+	unsigned gridSizeX = 10;
+	unsigned gridSizeY = 10;
+
+	sf::Vector2u mousePosHorizontal;
+
+	sf::RectangleShape horizontalHit;
+
+	sf::Event ev;
+
+	bool isRendered;
 
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
@@ -28,8 +35,8 @@ private:
 	void initButtons();
 
 public:
-	MainMenuState(StateData* state_data);
-	virtual ~MainMenuState();
+	GridMapper(StateData* state_data);
+	virtual ~GridMapper();
 
 	//Functions
 	void updateInput(const float& dt);
@@ -37,6 +44,6 @@ public:
 	void update(const float& dt);
 	void renderButtons(sf::RenderTarget& target);
 	void render(sf::RenderTarget* target = nullptr);
-
 };
+
 

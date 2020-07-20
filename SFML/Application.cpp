@@ -18,7 +18,7 @@ void Application::initVariables()
 	//shape.setTextureRect(sf::IntRect(10, 10, 100, 100));
 	buttons["UP"] = new gui::Button(100.f, 100.f, 250.f, 50.f, &font, "vergrößern");
 	buttons["DOWN"] = new gui::Button(100.f, 200.f, 250.f, 50.f, &font, "verkeinern");
-	gridSize = 8;
+	gridSize = 100;
 	
 }
 

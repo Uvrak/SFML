@@ -56,15 +56,15 @@ void MainMenuState::initButtons()
 		
 	);
 
-	this->buttons["SETTINGS_STATE"] = new gui::Button(300.f, 580.f, 250.f, 50.f,
-		&this->font, "Settings", 50,
+	this->buttons["GRID_MAPPER_STATE"] = new gui::Button(300.f, 580.f, 250.f, 50.f,
+		&this->font, "GridMapper", 50,
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50)
 		
 	);
 
 	this->buttons["ULTIMA7_TILES_STATE"] = new gui::Button(300.f, 680.f, 250.f, 50.f,
-		&this->font, "Editor", 50,
+		&this->font, "Ultima 7 tiles", 50,
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50)
 		
@@ -120,8 +120,8 @@ void MainMenuState::updateButtons()
 	}
 
 	//Settings
-	if (this->buttons["SETTINGS_STATE"]->isPressed()) {
-		//this->states->push(new SettingsState(this->stateData));
+	if (this->buttons["GRID_MAPPER_STATE"]->isPressed()) {
+		this->states->push(new GridMapper(this->stateData));
 	}
 
 	//Editor
