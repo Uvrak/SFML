@@ -9,6 +9,7 @@ private:
 	//Variables
 	std::vector<std::vector<std::vector<sf::RectangleShape>>> grid;
 	std::vector<std::vector<std::vector<sf::RectangleShape*>>> horizontalLines;
+	std::vector<std::vector<std::vector<sf::RectangleShape*>>> verticalLines;
 
 	unsigned gridSizeX = 10;
 	unsigned gridSizeY = 10;
@@ -16,6 +17,8 @@ private:
 	sf::Vector2u mousePosHorizontal;
 
 	sf::RectangleShape horizontalHit;
+
+	sf::RectangleShape clientRect;
 
 	sf::Event ev;
 

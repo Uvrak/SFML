@@ -9,6 +9,12 @@ void GridMapper::initVariables()
 
 void GridMapper::initBackground()
 {
+	this->clientRect.setSize(sf::Vector2f(this->gridSize * this->gridSizeX, this->gridSize * this->gridSizeY));
+	this->clientRect.setPosition(sf::Vector2f(1, 1));
+	//this->clientRect.setOutlineThickness(1.f);
+	//this->clientRect.setOutlineColor(sf::Color::Green);
+	this->clientRect.setFillColor(sf::Color::Transparent);
+
 	this->grid.resize(this->gridSizeX);
 	for (auto x = 0; x < this->gridSizeX; x++)
 	{
@@ -39,11 +45,30 @@ void GridMapper::initBackground()
 			this->horizontalLines[x].push_back(std::vector<sf::RectangleShape*>());
 
 			this->horizontalLines[x][y].push_back(new sf::RectangleShape());
-			this->horizontalLines[x][y].at(0)->setSize(sf::Vector2f(4, this->gridSize));
+			this->horizontalLines[x][y].at(0)->setSize(sf::Vector2f(3, this->gridSize));
 			this->horizontalLines[x][y].at(0)->setPosition(sf::Vector2f(x * this->gridSize - 2, y * gridSize));
 			this->horizontalLines[x][y].at(0)->setFillColor(sf::Color::Transparent);
 
 			
+		}
+	}
+
+	for (auto x = 0; x < this->gridSizeX; x++)
+	{
+		this->verticalLines.resize(this->gridSizeX + 1);
+		this->verticalLines[x].push_back(std::vector<sf::RectangleShape*>());
+
+		for (auto y = 0; y <= this->gridSizeY; y++)
+		{
+			this->verticalLines.resize(this->gridSizeY + 1);
+			this->verticalLines[x].push_back(std::vector<sf::RectangleShape*>());
+
+			this->verticalLines[x][y].push_back(new sf::RectangleShape());
+			this->verticalLines[x][y].at(0)->setSize(sf::Vector2f(this->gridSize, 3));
+			this->verticalLines[x][y].at(0)->setPosition(sf::Vector2f(x * gridSize, y * this->gridSize -2));
+			this->verticalLines[x][y].at(0)->setFillColor(sf::Color::Transparent);
+
+
 		}
 	}
 
@@ -116,45 +141,59 @@ void GridMapper::updateInput(const float& dt)
 				std::cout << "Button clicked";
 
 				sf::RectangleShape line;
-				//line.setSize(sf::Vector2f(3, this->gridSize));
-				//line.setFillColor(sf::Color::Blue);
-				//line.setPosition(this->mousePosGrid.x * this->gridSize - 2, this->mousePosGrid.y * this->gridSize);
-				//horizontalLines.push_back(line);
-				//std::cout << horizontalLines.size();
-				//unsigned xMin = static_cast<unsigned>(this->horizontalLines[mousePosGrid.x][mousePosGrid.y].at(0).getLocalBounds().width) - 10;
-				//unsigned xMax = static_cast<unsigned>(this->horizontalLines[mousePosGrid.x][mousePosGrid.y].at(0).getLocalBounds().width) + 10;;
-
 				
 				horizontalHit.setSize(sf::Vector2f(20, 20));
 				horizontalHit.setPosition(mousePosView.x - 10.f, mousePosView.y - 10.f);
 				horizontalHit.setFillColor(sf::Color::Magenta);
-				int temp = (this->mousePosView.x + this->gridSize) / this->gridSize;
-				if (
-					(horizontalHit.getGlobalBounds().intersects(this->horizontalLines[mousePosGrid.x ][mousePosGrid.y].at(0)->getGlobalBounds()))
+				
+				
+				if (horizontalHit.getGlobalBounds().intersects(this->clientRect.getGlobalBounds()))
+				{
+					if (
+						(horizontalHit.getGlobalBounds().intersects(this->horizontalLines[mousePosGrid.x][mousePosGrid.y].at(0)->getGlobalBounds()))
 						|| (this->horizontalLines[mousePosGrid.x + 1][mousePosGrid.y].at(0)->getGlobalBounds().intersects(horizontalHit.getGlobalBounds()))
-					)
-					
+						)
 					{
 						float xPos = mousePosGrid.x;
-						if(this->horizontalLines[mousePosGrid.x + 1][mousePosGrid.y].at(0)->getGlobalBounds().intersects(horizontalHit.getGlobalBounds()))
+						std::cout << "\n" << mousePosView.x << " -- " << this->clientRect.getGlobalBounds().width;
+						if (mousePosView.x < this->clientRect.getGlobalBounds().width && mousePosView.y < this->clientRect.getGlobalBounds().height)
 						{
-							xPos = mousePosGrid.x + 1;
-						}
-					
-						std::cout << temp;
-						//std::cout << (this->horizontalLines[mousePosGrid.x][mousePosGrid.y].at(0).getGlobalBounds().left) << "\n";
-						if (horizontalLines[xPos][this->mousePosGrid.y].at(0)->getFillColor() == sf::Color::Transparent)
-							horizontalLines[xPos][this->mousePosGrid.y].at(0)->setFillColor(sf::Color::Blue);
-						else
-							horizontalLines[xPos][this->mousePosGrid.y].at(0)->setFillColor(sf::Color::Transparent);
-					};
+							if (this->horizontalLines[mousePosGrid.x + 1][mousePosGrid.y].at(0)->getGlobalBounds().intersects(horizontalHit.getGlobalBounds()))
+							{
+								xPos = mousePosGrid.x + 1;
+							}
 
-				
+							if (horizontalLines[xPos][this->mousePosGrid.y].at(0)->getFillColor() == sf::Color::Transparent)
+								horizontalLines[xPos][this->mousePosGrid.y].at(0)->setFillColor(sf::Color::Blue);
+							else
+								horizontalLines[xPos][this->mousePosGrid.y].at(0)->setFillColor(sf::Color::Transparent);
+						}	
+					};
+					if (mousePosView.x < this->clientRect.getGlobalBounds().width && mousePosView.y < this->clientRect.getGlobalBounds().height)
+					{
+						if (
+							(horizontalHit.getGlobalBounds().intersects(this->verticalLines[mousePosGrid.x][mousePosGrid.y].at(0)->getGlobalBounds()))
+							|| (this->verticalLines[mousePosGrid.x][mousePosGrid.y + 1].at(0)->getGlobalBounds().intersects(horizontalHit.getGlobalBounds()))
+							)
+						{
+							float yPos = mousePosGrid.y;
+							std::cout << "\n" << mousePosView.x << " -- "<< this->clientRect.getGlobalBounds().width;
+						
+								if (this->verticalLines[mousePosGrid.x][mousePosGrid.y + 1].at(0)->getGlobalBounds().intersects(horizontalHit.getGlobalBounds()))
+								{
+									yPos = mousePosGrid.y + 1;
+								}
+
+								if (verticalLines[mousePosGrid.x][yPos].at(0)->getFillColor() == sf::Color::Transparent)
+									verticalLines[mousePosGrid.x][yPos].at(0)->setFillColor(sf::Color::Blue);
+								else
+									verticalLines[mousePosGrid.x][yPos].at(0)->setFillColor(sf::Color::Transparent);
+							}
+					}
+				}
 				std::cout << "\n";
 				break;
 			}
-
-
 			break;
 		}
 	}
@@ -201,8 +240,9 @@ void GridMapper::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 
-	target->draw(this->background);
+	//target->draw(this->background);
 
+	target->draw(this->clientRect);
 	//this->renderButtons(*target);
 	for (int x = 0; x < this->gridSizeX; x++)
 	{
@@ -218,6 +258,14 @@ void GridMapper::render(sf::RenderTarget* target)
 		for (auto y = 0; y <= this->gridSizeY; y++)
 		{
 			target->draw(*horizontalLines[x][y].at(0));
+		}
+	}
+
+	for (auto x = 0; x < this->gridSizeX; x++)
+	{
+		for (auto y = 0; y <= this->gridSizeY; y++)
+		{
+			target->draw(*verticalLines[x][y].at(0));
 		}
 	}
 
